@@ -69,3 +69,19 @@ plot_state_paulivec(qcs)
 #result = execute(circuit, backend, shots=1024).result()
 #counts = result.get_counts()
 #print(counts)
+
+
+#plot histogram
+from qiskit import Aer, BasicAer, execute
+from qiskit import QuantumRegister, QuantumCircuit
+from qiskit.visualization import plot_histogram
+
+q = QuantumRegister(3, 'q')
+c=ClassicalRegister(3,'c')
+qc = QuantumCircuit(q,c)
+qc.h(q[0:3])
+
+qasm_sim = BasicAer.get_backend('qasm_simulator')
+result = execute(qc, qasm_sim).result()
+counts = result.get_counts()
+plot_histogram(counts)
