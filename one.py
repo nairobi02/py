@@ -40,9 +40,30 @@ plot_state_city(state)
 #plot bloch vector 
 from qiskit.visualization import plot_bloch_vector
 plot_bloch_vector(circuit,title="New Bloch Sphere")
+from qiskit import QuantumCircuit, Aer, transpile, execute
+from qiskit.quantum_info import Statevector
+from qiskit.visualization import (
+    plot_state_city, plot_bloch_multivector,
+    plot_state_paulivec, plot_state_hinton,
+    plot_state_qsphere
+)
 
-#from qiskit import QuantumCircuit, Aer, transpile, executefrom qiskit.quantum_info import Statevectorfrom qiskit.visualization import plot_state_city, plot_bloch_multivectorfrom qiskit.visualization import plot_state_paulivec, plot_state_hintonfrom qiskit.visualization import plot_state_qsphereqc=QuantumCircuit(2,2)backend = Aer.get_backend('statevector_simulator')result = backend.run(transpile(qc, backend)).result()qcs  = result.get_statevector(qc)print(qc)print(backend)print(result)print(qcs)array_to_latex(qcs)qc.draw()qc.draw('latex')plot_bloch_multivector(qcs)plot_state_qsphere(qcs)plot_state_city(qcs)plot_state_hinton(qcs)plot_state_paulivec(qcs)
-
+qc = QuantumCircuit(2, 2)
+backend = Aer.get_backend('statevector_simulator')
+result = backend.run(transpile(qc, backend)).result()
+qcs = result.get_statevector(qc)
+print(qc)
+print(backend)
+print(result)
+print(qcs)
+array_to_latex(qcs)
+qc.draw()
+qc.draw('latex')
+plot_bloch_multivector(qcs)
+plot_state_qsphere(qcs)
+plot_state_city(qcs)
+plot_state_hinton(qcs)
+plot_state_paulivec(qcs)
 
 #backend = Aer.get_backend('qasm_simulator')
 #result = execute(circuit, backend, shots=1024).result()
